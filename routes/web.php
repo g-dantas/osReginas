@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('departamentos', 'DepartamentoController');
+Route::resource('defeitos', 'DefeitoController');

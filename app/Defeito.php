@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Departamento extends Model
+class Defeito extends Model
 {
-    protected $primaryKey = 'id_depto';
+    protected $primaryKey = 'id_defeito';
     protected $fillable = [
-        'desc_depto'
+        'desc_defeito'
     ];
 }

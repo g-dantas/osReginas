@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Departamento;
+use App\Defeito;
 
-class DepartamentoController extends Controller
+class DefeitoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $departamentos = Departamento::all();
+        $defeitos = Defeito::all();
 
-        return view('index_departamento', compact('departamentos'));
+        return view('index_defeito', compact('defeitos'));
     }
 
     /**
@@ -26,7 +26,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        return view('create_departamento');
+        return view('create_defeito');
     }
 
     /**
@@ -38,12 +38,12 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'desc_depto' => 'required|max:45',
+            'desc_defeito' => 'required|max:45',
         ]);
 
-        $departamento = Departamento::create($validateData);
+        $defeito = Defeito::create($validateData);
 
-        return redirect('/departamentos')->with('success', 'Departamento cadastrado com sucesso');
+        return redirect('/defeitos')->with('success', 'Defeito cadastrado com sucesso');
     }
 
     /**
@@ -65,9 +65,9 @@ class DepartamentoController extends Controller
      */
     public function edit($id)
     {
-        $departamento = Departamento::findOrFail($id);
+        $defeito = Defeito::findOrFail($id);
 
-        return view('edit_departamento', compact('departamento'));
+        return view('edit_defeito', compact('defeito'));
     }
 
     /**
@@ -80,13 +80,13 @@ class DepartamentoController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'desc_depto' => 'required|max:45'
+            'desc_defeito' => 'required|max:45'
         ]);
 
-        Departamento::where('id_depto', $id)
-                    ->update(['desc_depto' => $request->desc_depto]);
+        Defeito::where('id_defeito', $id)
+               ->update(['desc_defeito' => $request->desc_defeito]);
 
-        return redirect('/departamentos')->with('success', 'Departamento alterado com sucesso');
+        return redirect('/defeitos')->with('success', 'Defeito alterado com sucesso');
     }
 
     /**
