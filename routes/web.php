@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 Route::resource('departamentos', 'DepartamentoController');
 Route::resource('defeitos', 'DefeitoController');
+Route::resource('tipos_usuarios', 'TipoUsuarioController');
+Route::resource('status_os', 'StatusOSController');

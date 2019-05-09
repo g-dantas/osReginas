@@ -72,16 +72,28 @@
                                 <a href="{{ route('defeitos.index') }}"><i class="fa fa-bug fa-fw"></i> Defeitos</a>
                             </li>
                             <li>
-                                <a href="index.html"><i class="fa fa-address-card fa-fw"></i> Usuários</a>
+                                <a href="#"><i class="fa fa-address-card fa-fw"></i> Usuários<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('tipos_usuarios.index') }}">Tipos Usuários</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Consulta Usuário</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Novo Usuário</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-desktop fa-fw"></i> OS<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Status OS</a>
+                                        <a href="{{ route('status_os.index') }}">Status OS</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Nova OS</a>
+                                        <a href="morris.html">Abrir OS</a>
                                     </li>
                                     <li>
                                         <a href="morris.html">Consulta OS</a>
