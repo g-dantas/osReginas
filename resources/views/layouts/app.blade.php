@@ -96,7 +96,7 @@
                                         <a href="morris.html">Abrir OS</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Consulta OS</a>
+                                        <a href="{{ route('os_header.index') }}">Consulta OS</a>
                                     </li>
                                     <li>
                                         <a href="morris.html">Monitoramento OS</a>
