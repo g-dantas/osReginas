@@ -11,4 +11,8 @@ class StatusOS extends Model
     protected $fillable = [
         'desc_status'
     ];
+
+    public function osHeader() {
+        return $this->belongsToMany(OsHeader::class);
+    }
 }

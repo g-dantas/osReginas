@@ -9,6 +9,7 @@ use App\TipoUsuario;
 class Usuario extends Model
 {
     protected $primaryKey = 'id_usuario';
+    protected $table = 'usuarios';
     protected $fillable = [
         'nome_usuario',
         'login_usuario',

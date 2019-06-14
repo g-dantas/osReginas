@@ -27,24 +27,32 @@
                                 <th>Usuario</th>
                                 <th>Dt. Abertura</th>
                                 <th>Defeito</th>
+                                <th>Pos. na Fila</th>
                                 <th>Status</th>
-                                <th>Fila Atendimento</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($oss as $os)
                                 <tr>
-                                    <td>{{ $os->id_header_os }}</td>
-                                    <td>{{ $os->id_usuario_header }}</td>
-                                    <td>{{ $os->data_hora_abertura_header }}</td>
-                                    <td>{{ $os->id_defeito_header }}</td>
-                                    <td>{{ $os->status() }}</td>
-                                    <td>{{ $os->fila_atendimento_header }}</td>
+                                    <td>{{ $os->id }}</td>
+                                    <td>{{ $os->nome }}</td>
+                                    <td>{{ $os->data_abertura }}</td>
+                                    <td>{{ $os->defeito }}</td>
+                                    <td>{{ $os->fila }}</td>
+                                    <td>{{ $os->status }}</td>
                                     <td>
-                                        <a href="{{ route('os_header.edit', $os->id_header_os) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-edit fa-fw"></span>
+                                        <a href="{{ route('os_body.show', $os->id) }}" class="btn btn-primary btn-xs">
+                                            <span class="fa fa-align-justify fa-lg"></span>
                                         </a>
+                                        <a href="{{ route('os_body.create') }}" class="btn btn-success btn-xs">
+                                            <span class="fa fa-plus fa-lg"></span>
+                                        </a>
+                                        @if($os->id_status == 1)
+                                            <a href="{{ route('os_header.atendimento') }}" class="btn btn-warning btn-xs">
+                                                <span class="fa fa-send-o fa-lg"></span>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

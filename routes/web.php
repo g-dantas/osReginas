@@ -20,3 +20,5 @@ Route::resource('defeitos', 'DefeitoController');
 Route::resource('tipos_usuarios', 'TipoUsuarioController');
 Route::resource('status_os', 'StatusOSController');
 Route::resource('os_header', 'OSHeaderController');
+Route::resource('os_body', 'OSBodyController');
+Route::post()

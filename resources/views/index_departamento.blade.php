@@ -35,7 +35,7 @@
                                     <td>{{ $departamento->desc_depto }}</td>
                                     <td>
                                         <a href="{{ route('departamentos.edit', $departamento->id_depto) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-edit fa-fw"></span>
+                                            <span class="fa fa-edit fa-lg"></span>
                                         </a>
                                     </td>
                                 </tr>

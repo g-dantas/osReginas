@@ -8,8 +8,11 @@ class OsHeader extends Model
 {
     protected $primaryKey = 'id_header_os';
     protected $table = 'os_header';
-
-    public function status() {
-        return $this->hasOne('App\OsHeader', 'status_header', 'id_status');
-    }
+    protected $fillable = [
+      'id_usuario_header',
+      'data_hora_abertura_header',
+      'status_header',
+      'fila_atendimento_header',
+      'id_defeito_header'
+    ];
 }

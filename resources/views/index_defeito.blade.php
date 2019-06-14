@@ -35,7 +35,7 @@
                                     <td>{{ $defeito->desc_defeito }}</td>
                                     <td>
                                         <a href="{{ route('defeitos.edit', $defeito->id_defeito) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-edit fa-fw"></span>
+                                            <span class="fa fa-edit fa-lg"></span>
                                         </a>
                                     </td>
                                 </tr>

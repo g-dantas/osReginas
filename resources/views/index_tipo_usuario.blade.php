@@ -35,7 +35,7 @@
                                     <td>{{ $tipo->desc_tp_usuario }}</td>
                                     <td>
                                         <a href="{{ route('tipos_usuarios.edit', $tipo->id_tp_usuario) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-edit fa-fw"></span>
+                                            <span class="fa fa-edit fa-lg"></span>
                                         </a>
                                     </td>
                                 </tr>

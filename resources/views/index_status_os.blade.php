@@ -35,7 +35,7 @@
                                     <td>{{ $os->desc_status }}</td>
                                     <td>
                                         <a href="{{ route('status_os.edit', $os->id_status) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-edit fa-fw"></span>
+                                            <span class="fa fa-edit fa-lg"></span>
                                         </a>
                                     </td>
                                 </tr>
