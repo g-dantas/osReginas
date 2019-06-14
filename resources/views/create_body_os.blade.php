@@ -21,15 +21,17 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Novo Atendimento
+                    Novo Atendimento - OS: {{$numOs}}
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <form role="form" method="post" action="{{ route('os_body.store') }}">
+                                <input type="hidden" name="id_header_os" id="id_header_os" value="{{$numOs}}">
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select class="form-control" name="status_header" id="status_header">
+                                        <option value="{{$idStatusAtual}}" selected>{{$descStatusAtual}}</option>
                                         @foreach($status as $st)
                                             <option value="{{$st->id_status}}">{{$st->desc_status}}</option>
                                         @endforeach

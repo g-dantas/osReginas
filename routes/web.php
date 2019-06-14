@@ -21,4 +21,9 @@ Route::resource('tipos_usuarios', 'TipoUsuarioController');
 Route::resource('status_os', 'StatusOSController');
 Route::resource('os_header', 'OSHeaderController');
 Route::resource('os_body', 'OSBodyController');
-Route::post()
+Route::put('/os_body/atendimento/{id}',
+    [ 'as' => 'os_body.atendimento',
+      'uses' => 'OsBodyController@emAtendimento']);
+Route::get('/os_body/novo_atendimento/{id}',
+    [ 'as' => 'os_body.novo_atendimento',
+        'uses' => 'OsBodyController@novoAtendimento']);
