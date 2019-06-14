@@ -17,8 +17,8 @@ class CreateOsHeadersTable extends Migration
             $table->increments('id_header_os');
             $table->unsignedInteger('id_usuario_header');
             $table->foreign('id_usuario_header')
-                  ->references('id_usuario')
-                  ->on('usuarios')
+                  ->references('id')
+                  ->on('users')
                   ->onDelete('cascade');
             $table->dateTime('data_hora_abertura_header');
             $table->unsignedInteger('status_header')

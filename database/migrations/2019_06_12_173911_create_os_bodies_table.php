@@ -23,8 +23,8 @@ class CreateOsBodiesTable extends Migration
             $table->dateTime('data_os_body');
             $table->unsignedInteger('id_usuario_body');
             $table->foreign('id_usuario_body')
-                  ->references('id_usuario')
-                  ->on('usuarios')
+                  ->references('id')
+                  ->on('users')
                   ->onDelete('cascade');
             $table->longText('texto_body');
             $table->timestamps();

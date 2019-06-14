@@ -45,11 +45,13 @@
                                         <a href="{{ route('os_body.show', $os->id) }}" class="btn btn-primary btn-xs">
                                             <span class="fa fa-align-justify fa-lg"></span>
                                         </a>
-                                        <a href="{{ route('os_body.novo_atendimento', $os->id) }}" class="btn btn-success btn-xs">
-                                            <span class="fa fa-plus fa-lg"></span>
-                                        </a>
+                                        @if ($os->id_status != 4 && $os->id_status != 5 && $os->id_status != 6)
+                                            <a href="{{ route('os_body.novo_atendimento', $os->id) }}" class="btn btn-success btn-xs">
+                                                <span class="fa fa-plus fa-lg"></span>
+                                            </a>
+                                        @endif
                                         @if($os->id_status == 1)
-                                            <form class="form-horizontal" action="{{ route('os_body.atendimento', $os->id) }}" method="post" style="display: inline-block;">
+                                            <form class="form-horizontal" action="{{ route('os_body.atendimento', $os->id) }}" method="post">
                                                 {!! csrf_field() !!}
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <button type="submit" class="btn btn-warning btn-xs">

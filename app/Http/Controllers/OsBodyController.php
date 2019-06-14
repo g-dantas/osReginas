@@ -80,7 +80,7 @@ class OsBodyController extends Controller
     {
         $headerOs = DB::table('os_header')
                           ->join('status_os', 'os_header.status_header', 'status_os.id_status')
-                          ->select('os_header.data_hora_abertura_header', 'status_os.desc_status')
+                          ->select('os_header.data_hora_abertura_header', 'status_os.desc_status', 'os_header.status_header')
                           ->where('os_header.id_header_os', $id)
                           ->first();
 
@@ -92,9 +92,10 @@ class OsBodyController extends Controller
 
         $os = "OS - ".$id." - Aberta no dia: ".$headerOs->data_hora_abertura_header;
         $status = $headerOs->desc_status;
+        $idStatus = $headerOs->status_header;
         $data = $headerOs->data_hora_abertura_header;
 
-        return view('index_body_os', compact('os', 'data', 'bodyOs', 'status'));
+        return view('index_body_os', compact('os', 'data', 'bodyOs', 'status', 'idStatus', 'id'));
     }
 
     /**
@@ -161,5 +162,18 @@ class OsBodyController extends Controller
         $numOs = $statusOs->id_header_os;
 
         return view('create_body_os', compact('status', 'idStatusAtual', 'descStatusAtual', 'numOs'));
+    }
+
+    public function confirmaFinalizacao($id)
+    {
+        $updateFinaliza = DB::table('os_header')
+                            ->where('id_header_os', $id)
+                            ->update(['status_header' => 5]);
+
+        if ($updateFinaliza) {
+            return redirect('/os_header')->with('success', 'OS finalizada com sucesso');
+        } else {
+            return redirect('/os_header')->with('error', 'Erro ao finalizar a OS');
+        }
     }
 }

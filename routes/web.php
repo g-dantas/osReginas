@@ -27,3 +27,10 @@ Route::put('/os_body/atendimento/{id}',
 Route::get('/os_body/novo_atendimento/{id}',
     [ 'as' => 'os_body.novo_atendimento',
         'uses' => 'OsBodyController@novoAtendimento']);
+Route::post('/os_body/confirma_finalizacao/{id}',
+    [ 'as' => 'os_body.confirma_finalizacao',
+        'uses' => 'OsBodyController@confirmaFinalizacao']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

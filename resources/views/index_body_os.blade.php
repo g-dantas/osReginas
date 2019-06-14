@@ -45,6 +45,15 @@
             </ul>
         </div>
         <!-- /.panel-body -->
+            <div class="panel-footer">
+                @if ($idStatus == 4)
+                <form role="form" method="post" action="{{ route('os_body.confirma_finalizacao', $id) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Confirma Finalização?</button>
+                </form>
+                @endif
+                <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">Voltar</a>
+            </div>
     </div>
     <!-- /.panel -->
 @endsection
