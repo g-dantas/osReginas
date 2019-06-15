@@ -52,10 +52,10 @@
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> admin <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> {{Auth::user()->name}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                            <li><a href="{{Auth::logout()}}"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                             </li>
                         </ul>
                     </li>

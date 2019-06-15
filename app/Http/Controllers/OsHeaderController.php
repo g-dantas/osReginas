@@ -19,10 +19,10 @@ class OsHeaderController extends Controller
     {
         $oss = DB::table('os_header')
                  ->join('status_os', 'os_header.status_header', 'status_os.id_status')
-                 ->join('usuarios', 'os_header.id_usuario_header', 'usuarios.id_usuario')
+                 ->join('users', 'os_header.id_usuario_header', 'users.id')
                  ->join('defeitos', 'os_header.id_defeito_header', 'defeitos.id_defeito')
                  ->select('os_header.id_header_os as id',
-                          'usuarios.nome_usuario as nome',
+                          'users.name as nome',
                           'os_header.data_hora_abertura_header as data_abertura',
                           'defeitos.desc_defeito as defeito',
                           'os_header.fila_atendimento_header as fila',
