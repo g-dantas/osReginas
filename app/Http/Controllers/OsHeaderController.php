@@ -66,6 +66,7 @@ class OsHeaderController extends Controller
         if (Auth::user()->id_tp_usuario == 1) {
             $usuarios = DB::table('users')
                           ->join('os_header', 'users.id', 'os_header.id_usuario_header')
+                          ->where('users.usuario_ativo', 'S')
                           ->select('users.id', 'users.name')
                           ->get();
         }

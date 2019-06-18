@@ -21,7 +21,8 @@ class User extends Authenticatable
         'password',
         'id_tp_usuario',
         'id_departamento',
-        'login'
+        'login',
+        'usuario_ativo'
     ];
 
     /**

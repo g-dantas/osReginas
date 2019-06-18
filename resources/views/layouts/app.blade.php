@@ -40,7 +40,8 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">OS Reginas</a>
+                    <img src="{{ asset('img/reginas.png') }}" alt="Logo Reginas Menu" class="img-responsive">
+                    <!--<a class="navbar-brand" href="index.html">OS Reginas</a>-->
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -84,10 +85,7 @@
                                         <a href="{{ route('tipos_usuarios.index') }}">Tipos Usuários</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Consulta Usuário</a>
-                                    </li>
-                                    <li>
-                                        <a href="morris.html">Novo Usuário</a>
+                                        <a href="{{ route('user.index') }}">Consulta Usuário</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

@@ -80,6 +80,7 @@ class RegisterController extends Controller
             'id_departamento' => $data['id_departamento'],
             'login' => $data['login'],
             'password' => Hash::make($data['password']),
+            'usuario_ativo' => 'S'
         ]);
     }
 

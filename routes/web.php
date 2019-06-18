@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', function () {
-    return redirect('os_header');
+    return redirect('login');
 });
 Route::middleware(['auth'])
      ->group(function (){
@@ -33,6 +33,12 @@ Route::middleware(['auth'])
          Route::get('user/logout',
              [ 'as' => 'user.logout',
                'uses' => 'UserController@logout']);
+         Route::get('user/index',
+             [ 'as' => 'user.index',
+                 'uses' => 'UserController@index']);
+         Route::put('user/desativa/{id}',
+             [ 'as' => 'user.desativa',
+                 'uses' => 'UserController@desativa']);
          Route::get('monitoramento', 'OsHeaderController@monitoramento')->name('monitoramento');
 });
 
