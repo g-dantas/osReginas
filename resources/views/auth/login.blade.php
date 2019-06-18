@@ -1,7 +1,12 @@
 @extends('layouts.app_login')
 @section('content')
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="text-center">
+            <img src="{{asset('img/reginas_brasao.png')}}" alt="Logo da Reginas">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" style="height: 100pspx;">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Login - OS Reginas</h3>
@@ -29,6 +34,8 @@
                             </div>
                             <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                             <!-- Change this to a button or input when using this as a form -->
+                            <br>
+                            <a href="{{route('register')}}">Novo Usuário?</a>
                         </fieldset>
                     </form>
                 </div>

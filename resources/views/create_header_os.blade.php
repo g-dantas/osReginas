@@ -27,6 +27,17 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form role="form" method="post" action="{{ route('os_header.store') }}">
+                                @if(!empty($usuarios))
+                                <div class="form-group">
+                                    <label>Usuário</label>
+                                    <select name="id_usuario_header" id="id_usuario_header" class="form-control">
+                                        <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
+                                        @foreach($usuarios as $usuario)
+                                            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @endif
                                 <div class="form-group">
                                     <label>Defeito</label>
                                     <select class="form-control" name="id_defeito_header" id="id_defeito_header">

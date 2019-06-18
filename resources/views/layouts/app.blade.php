@@ -9,6 +9,7 @@
 
         <title>OS Reginas</title>
 
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -55,7 +56,11 @@
                             <i class="fa fa-user fa-fw"></i> {{Auth::user()->name}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="{{Auth::logout()}}"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                            <li>
+                                <a href="{{route('user.logout')}}"><i class="fa fa-sign-out fa-fw"></i>Sair</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -65,6 +70,7 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
+                            @can('isAdmin')
                             <li>
                                 <a href="{{ route('departamentos.index') }}"><i class="fa fa-briefcase fa-fw"></i> Departamentos</a>
                             </li>
@@ -86,21 +92,26 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            @endcan
                             <li>
                                 <a href="#"><i class="fa fa-desktop fa-fw"></i> OS<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                    @can('isAdmin')
                                     <li>
                                         <a href="{{ route('status_os.index') }}">Status OS</a>
                                     </li>
+                                    @endcan
                                     <li>
-                                        <a href="morris.html">Abrir OS</a>
+                                        <a href="{{ route('os_header.create') }}">Abrir OS</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('os_header.index') }}">Consulta OS</a>
                                     </li>
+                                    @can('isAdmin')
                                     <li>
-                                        <a href="morris.html">Monitoramento OS</a>
+                                        <a href="{{ route('monitoramento') }}">Monitoramento OS</a>
                                     </li>
+                                    @endcan
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>

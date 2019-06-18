@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -29,8 +30,15 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/os_header';
+    //protected $redirectTo = '/os_header';
+    protected function redirectTo() {
 
+        if (Auth::user()->id_tp_usuario == 1) {
+            return '/os_header/monitoramento';
+        } else {
+            return '/os_header';
+        }
+    }
     /**
      * Create a new controller instance.
      *

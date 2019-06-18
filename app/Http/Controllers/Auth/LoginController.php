@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,8 +26,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/os_header';
+    //protected $redirectTo = '/os_header';
+    protected function redirectTo() {
 
+        if (Auth::user()->id_tp_usuario == 1) {
+            return '/monitoramento';
+        } else {
+            return '/os_header';
+        }
+    }
     /**
      * Create a new controller instance.
      *

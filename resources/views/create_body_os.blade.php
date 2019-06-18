@@ -43,7 +43,7 @@
                                               placeholder="Relate o que foi feito no atendimento..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Salvar</button>
-                                <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">
+                                <a type="button" class="btn btn-warning" href="{{ route('monitoramento') }}">
                                     Cancelar</a>
                             </form>
                         </div>

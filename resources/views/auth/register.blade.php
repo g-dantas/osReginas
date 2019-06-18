@@ -1,6 +1,11 @@
 @extends('layouts.app_login')
 @section('content')
     <div class="row">
+        <div class="text-center">
+            <img src="{{asset('img/reginas_brasao.png')}}" alt="Logo da Reginas">
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">

@@ -46,13 +46,17 @@
         </div>
         <!-- /.panel-body -->
             <div class="panel-footer">
-                @if ($idStatus == 4)
-                <form role="form" method="post" action="{{ route('os_body.confirma_finalizacao', $id) }}">
+                @if ($idStatus == 4 and Auth::user()->id_tp_usuario == 2)
+                <form role="form" class="form-horizontal" method="post" action="{{ route('os_body.confirma_finalizacao', $id) }}" style="display: inline">
                     @csrf
                     <button type="submit" class="btn btn-primary">Confirma Finalização?</button>
                 </form>
                 @endif
-                <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">Voltar</a>
+                @if($caminho == 'monitoramento')
+                    <a type="button" class="btn btn-warning" href="{{ route('monitoramento') }}">Voltar</a>
+                @else
+                    <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">Voltar</a>
+                @endif
             </div>
     </div>
     <!-- /.panel -->

@@ -9,6 +9,7 @@
 
     <title>OS Reginas</title>
 
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 

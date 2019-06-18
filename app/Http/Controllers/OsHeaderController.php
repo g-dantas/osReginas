@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\OsHeader;
@@ -17,18 +18,37 @@ class OsHeaderController extends Controller
      */
     public function index()
     {
-        $oss = DB::table('os_header')
-                 ->join('status_os', 'os_header.status_header', 'status_os.id_status')
-                 ->join('users', 'os_header.id_usuario_header', 'users.id')
-                 ->join('defeitos', 'os_header.id_defeito_header', 'defeitos.id_defeito')
-                 ->select('os_header.id_header_os as id',
-                          'users.name as nome',
-                          'os_header.data_hora_abertura_header as data_abertura',
-                          'defeitos.desc_defeito as defeito',
-                          'os_header.fila_atendimento_header as fila',
-                          'status_os.desc_status as status',
-                          'status_os.id_status as id_status')
-                 ->get();
+
+        if (Auth::user()->id_tp_usuario == 2) {
+            $oss = DB::table('os_header')
+                     ->join('status_os', 'os_header.status_header', 'status_os.id_status')
+                     ->join('users', 'os_header.id_usuario_header', 'users.id')
+                     ->join('defeitos', 'os_header.id_defeito_header', 'defeitos.id_defeito')
+                     ->where('os_header.id_usuario_header', Auth::user()->id)
+                     ->select('os_header.id_header_os as id',
+                        'users.name as nome',
+                        'os_header.data_hora_abertura_header as data_abertura',
+                        'defeitos.desc_defeito as defeito',
+                        'os_header.fila_atendimento_header as fila',
+                        'status_os.desc_status as status',
+                        'status_os.id_status as id_status')
+                     ->get();
+        } else {
+            $oss = DB::table('os_header')
+                     ->join('status_os', 'os_header.status_header', 'status_os.id_status')
+                     ->join('users', 'os_header.id_usuario_header', 'users.id')
+                     ->join('defeitos', 'os_header.id_defeito_header', 'defeitos.id_defeito')
+                     ->select('os_header.id_header_os as id',
+                        'users.name as nome',
+                        'os_header.data_hora_abertura_header as data_abertura',
+                        'defeitos.desc_defeito as defeito',
+                        'os_header.fila_atendimento_header as fila',
+                        'status_os.desc_status as status',
+                        'status_os.id_status as id_status')
+                     ->get();
+        }
+
+
 
         return view('index_header_os', compact('oss'));
     }
@@ -41,8 +61,16 @@ class OsHeaderController extends Controller
     public function create()
     {
         $defeitos = DB::table('defeitos')->get();
+        $usuarios= "";
 
-        return view('create_header_os', compact('defeitos'));
+        if (Auth::user()->id_tp_usuario == 1) {
+            $usuarios = DB::table('users')
+                          ->join('os_header', 'users.id', 'os_header.id_usuario_header')
+                          ->select('users.id', 'users.name')
+                          ->get();
+        }
+
+        return view('create_header_os', compact('defeitos', 'usuarios'));
     }
 
     /**
@@ -63,7 +91,14 @@ class OsHeaderController extends Controller
         $dataAbertura = Carbon::now('America/Sao_Paulo');
 
         $header = new OsHeader();
-        $header->id_usuario_header = 1;
+
+        if (isset($request->id_usuario_header)) {
+            $usuarioId = $request->id_usuario_header;
+        } else {
+           $usuarioId = Auth::user()->id;
+        }
+
+        $header->id_usuario_header = $usuarioId;
         $header->data_hora_abertura_header = $dataAbertura;
         $header->status_header = 1;
         $header->fila_atendimento_header = 1;
@@ -74,7 +109,7 @@ class OsHeaderController extends Controller
             $body = new OsBody();
             $body->id_header_os = $header->id_header_os;
             $body->data_os_body = $dataAbertura;
-            $body->id_usuario_body = 1;
+            $body->id_usuario_body = $usuarioId;
             $body->texto_body = $textoBody;
             $insertBody = $body->save();
         } else {
@@ -131,5 +166,24 @@ class OsHeaderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function monitoramento()
+    {
+        $oss = DB::table('os_header')
+            ->join('status_os', 'os_header.status_header', 'status_os.id_status')
+            ->join('users', 'os_header.id_usuario_header', 'users.id')
+            ->join('defeitos', 'os_header.id_defeito_header', 'defeitos.id_defeito')
+            ->whereNotIn('os_header.status_header', [5, 6])
+            ->select('os_header.id_header_os as id',
+                'users.name as nome',
+                'os_header.data_hora_abertura_header as data_abertura',
+                'defeitos.desc_defeito as defeito',
+                'os_header.fila_atendimento_header as fila',
+                'status_os.desc_status as status',
+                'status_os.id_status as id_status')
+            ->get();
+
+        return view('index_monitoramento_os', compact('oss'));
     }
 }

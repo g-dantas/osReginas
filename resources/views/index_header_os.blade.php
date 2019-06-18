@@ -23,7 +23,7 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-os_header">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Num. OS</th>
                                 <th>Usuario</th>
                                 <th>Dt. Abertura</th>
                                 <th>Defeito</th>
@@ -45,20 +45,6 @@
                                         <a href="{{ route('os_body.show', $os->id) }}" class="btn btn-primary btn-xs">
                                             <span class="fa fa-align-justify fa-lg"></span>
                                         </a>
-                                        @if ($os->id_status != 4 && $os->id_status != 5 && $os->id_status != 6)
-                                            <a href="{{ route('os_body.novo_atendimento', $os->id) }}" class="btn btn-success btn-xs">
-                                                <span class="fa fa-plus fa-lg"></span>
-                                            </a>
-                                        @endif
-                                        @if($os->id_status == 1)
-                                            <form class="form-horizontal" action="{{ route('os_body.atendimento', $os->id) }}" method="post">
-                                                {!! csrf_field() !!}
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-warning btn-xs">
-                                                    <span class="fa fa-send-o fa-lg"></span>
-                                                </button>
-                                            </form>
-                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

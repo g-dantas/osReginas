@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Defeito;
+use Illuminate\Support\Facades\Auth;
 
 class DefeitoController extends Controller
 {

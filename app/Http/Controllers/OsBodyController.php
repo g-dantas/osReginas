@@ -6,7 +6,10 @@ use App\OsBody;
 use App\OsHeader;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class OsBodyController extends Controller
 {
@@ -51,7 +54,7 @@ class OsBodyController extends Controller
         $body = new OsBody();
         $body->id_header_os = $idOs;
         $body->data_os_body = $dataOsBody;
-        $body->id_usuario_body = 1;
+        $body->id_usuario_body = Auth::user()->id;
         $body->texto_body = $textoBody;
         $insertBody = $body->save();
 
@@ -60,13 +63,13 @@ class OsBodyController extends Controller
                 ->where('id_header_os', $idOs)
                 ->update(['status_header' => $novoStatus]);
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao cadastrar um novo atendimento');
+            return redirect('/monitoramento')->with('error', 'Erro ao cadastrar um novo atendimento');
         }
 
         if ($updateStatus) {
-            return redirect('/os_header')->with('success', 'Novo atendimento cadastrado com sucesso');
+            return redirect('/monitoramento')->with('success', 'Novo atendimento cadastrado com sucesso');
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao alterar o status da OS');
+            return redirect('/monitoramento')->with('error', 'Erro ao alterar o status da OS');
         }
     }
 
@@ -78,6 +81,11 @@ class OsBodyController extends Controller
      */
     public function show($id)
     {
+
+        $url = URL::previous();
+        $caminho = explode("/", $url);
+        $caminho = $caminho[3];
+
         $headerOs = DB::table('os_header')
                           ->join('status_os', 'os_header.status_header', 'status_os.id_status')
                           ->select('os_header.data_hora_abertura_header', 'status_os.desc_status', 'os_header.status_header')
@@ -95,7 +103,7 @@ class OsBodyController extends Controller
         $idStatus = $headerOs->status_header;
         $data = $headerOs->data_hora_abertura_header;
 
-        return view('index_body_os', compact('os', 'data', 'bodyOs', 'status', 'idStatus', 'id'));
+        return view('index_body_os', compact('os', 'data', 'bodyOs', 'status', 'idStatus', 'id', 'caminho'));
     }
 
     /**
@@ -139,9 +147,9 @@ class OsBodyController extends Controller
                     ->update(['status_header' => 2]);
 
         if ($update) {
-            return redirect('/os_header')->with('success', 'Status da OS alterado para Em Andamento');
+            return redirect('/monitoramento')->with('success', 'Status da OS alterado para Em Andamento');
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao alterar o status da OS');
+            return redirect('/monitoramento')->with('error', 'Erro ao alterar o status da OS');
         }
     }
 
@@ -168,7 +176,7 @@ class OsBodyController extends Controller
     {
         $updateFinaliza = DB::table('os_header')
                             ->where('id_header_os', $id)
-                            ->update(['status_header' => 5]);
+                            ->update(['status_header' => 5, 'id_usuario_header' => Auth::user()->id]);
 
         if ($updateFinaliza) {
             return redirect('/os_header')->with('success', 'OS finalizada com sucesso');
