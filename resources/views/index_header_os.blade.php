@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{ $os->id }}</td>
                                     <td>{{ $os->nome }}</td>
-                                    <td>{{ $os->data_abertura }}</td>
+                                    <td>{{ date('d/m/Y H:i', strtotime($os->data_abertura)) }}</td>
                                     <td>{{ $os->defeito }}</td>
                                     <td>{{ $os->fila }}</td>
                                     <td>{{ $os->status }}</td>

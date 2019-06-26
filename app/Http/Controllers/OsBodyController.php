@@ -98,7 +98,7 @@ class OsBodyController extends Controller
                     ->orderBy('os_body.id_os_body', 'desc')
                     ->get();
 
-        $os = "OS - ".$id." - Aberta no dia: ".$headerOs->data_hora_abertura_header;
+        $os = "OS - ".$id." - Aberta no dia: ".date('d/m/Y H:i', strtotime($headerOs->data_hora_abertura_header));
         $status = $headerOs->desc_status;
         $idStatus = $headerOs->status_header;
         $data = $headerOs->data_hora_abertura_header;

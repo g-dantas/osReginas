@@ -23,7 +23,7 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <p>
-                                    <small class="text-muted"><i class="fa fa-clock-o"></i>{{$body->data_os_body}}
+                                    <small class="text-muted"><i class="fa fa-clock-o"></i>{{date('d/m/Y H:i', strtotime($body->data_os_body))}}
                                     </small>
                                 </p>
                             </div>

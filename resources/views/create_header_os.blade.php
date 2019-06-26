@@ -31,9 +31,12 @@
                                 <div class="form-group">
                                     <label>Usuário</label>
                                     <select name="id_usuario_header" id="id_usuario_header" class="form-control">
-                                        <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
                                         @foreach($usuarios as $usuario)
-                                            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                            @if ($usuario->id == Auth::user()->id)
+                                                <option value="{{$usuario->id}}" selected>{{$usuario->name}}</option>
+                                            @else
+                                                <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -52,8 +55,15 @@
                                               placeholder="Relate o problema aqui..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Salvar</button>
-                                <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">
+                                @if ($caminho == 'monitoramento')
+                                    <a type="button" class="btn btn-warning" href="{{ route('monitoramento') }}">
                                     Cancelar</a>
+                                @else
+                                    <a type="button" class="btn btn-warning" href="{{ route('os_header.index') }}">
+                                    Cancelar</a>
+                                @endif
+
+
                             </form>
                         </div>
                     </div>

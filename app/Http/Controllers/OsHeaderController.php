@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\OsHeader;
 use App\OsBody;
+use Illuminate\Support\Facades\URL;
 
 class OsHeaderController extends Controller
 {
@@ -60,18 +61,21 @@ class OsHeaderController extends Controller
      */
     public function create()
     {
+        $url = URL::previous();
+        $caminho = explode("/", $url);
+        $caminho = $caminho[3];
+
         $defeitos = DB::table('defeitos')->get();
         $usuarios= "";
 
         if (Auth::user()->id_tp_usuario == 1) {
             $usuarios = DB::table('users')
-                          ->join('os_header', 'users.id', 'os_header.id_usuario_header')
                           ->where('users.usuario_ativo', 'S')
                           ->select('users.id', 'users.name')
                           ->get();
         }
 
-        return view('create_header_os', compact('defeitos', 'usuarios'));
+        return view('create_header_os', compact('defeitos', 'usuarios', 'caminho'));
     }
 
     /**
