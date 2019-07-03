@@ -27,7 +27,6 @@
                                 <th>Usuario</th>
                                 <th>Dt. Abertura</th>
                                 <th>Defeito</th>
-                                <th>Pos. na Fila</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -39,7 +38,6 @@
                                     <td>{{ $os->nome }}</td>
                                     <td>{{ date('d/m/Y H:i', strtotime($os->data_abertura)) }}</td>
                                     <td>{{ $os->defeito }}</td>
-                                    <td>{{ $os->fila }}</td>
                                     <td>{{ $os->status }}</td>
                                     <td>
                                         <a href="{{ route('os_body.show', $os->id) }}" class="btn btn-primary btn-xs">
