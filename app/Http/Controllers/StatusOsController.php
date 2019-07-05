@@ -43,7 +43,15 @@ class StatusOsController extends Controller
 
         $status = StatusOS::create($validateData);
 
-        return redirect('/status_os')->with('success', 'Status cadastrado com sucesso');
+        if ($status) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Status cadastrado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao cadastrar status.');
+        }
+
+        return redirect('/status_os');
     }
 
     /**
@@ -83,8 +91,16 @@ class StatusOsController extends Controller
             'desc_status' => 'required|max:50'
         ]);
 
-        StatusOS::where('id_status', $id)
+        $update = StatusOS::where('id_status', $id)
                 ->update(['desc_status' => $request->desc_status]);
+
+        if ($update) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Status alterado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao alterar status.');
+        }
 
         return redirect('/status_os')->with('success', 'Status alterado com sucesso');
     }

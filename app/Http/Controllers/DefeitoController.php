@@ -44,7 +44,15 @@ class DefeitoController extends Controller
 
         $defeito = Defeito::create($validateData);
 
-        return redirect('/defeitos')->with('success', 'Defeito cadastrado com sucesso');
+        if ($defeito) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Defeito cadastrado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao cadastrar defeito.');
+        }
+
+        return redirect('/defeitos');
     }
 
     /**
@@ -84,10 +92,18 @@ class DefeitoController extends Controller
             'desc_defeito' => 'required|max:45'
         ]);
 
-        Defeito::where('id_defeito', $id)
-               ->update(['desc_defeito' => $request->desc_defeito]);
+        $update = Defeito::where('id_defeito', $id)
+                         ->update(['desc_defeito' => $request->desc_defeito]);
 
-        return redirect('/defeitos')->with('success', 'Defeito alterado com sucesso');
+        if ($update) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Defeito alterado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao alterar defeito.');
+        }
+
+        return redirect('/defeitos');
     }
 
     /**

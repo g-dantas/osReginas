@@ -118,13 +118,22 @@ class OsHeaderController extends Controller
             $body->texto_body = $textoBody;
             $insertBody = $body->save();
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao cadastrar a OS');
+            $request->session()->flash('status', 'danger');
+            $request->session()->flash('msg', 'Erro ao cadastrar a OS.');
+
+            return redirect('/os_header');
         }
 
         if ($insertBody) {
-            return redirect('/os_header')->with('success', 'OS Cadastrada com sucesso');
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'OS cadastrada com sucesso.');
+
+            return redirect('/os_header');
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao cadastrar a OS');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao lançar o atendimento da OS.');
+
+            return redirect('/os_header');
         }
     }
 

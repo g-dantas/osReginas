@@ -43,7 +43,15 @@ class TipoUsuarioController extends Controller
 
         $tipoUsuario = TipoUsuario::create($validateData);
 
-        return redirect('/tipos_usuarios')->with('success', 'Tipo de usuário cadastrado com sucesso');
+        if ($tipoUsuario) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Tipo de usuário cadastrado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao cadastrar tipo de usuário.');
+        }
+
+        return redirect('/tipos_usuarios');
     }
 
     /**
@@ -83,10 +91,18 @@ class TipoUsuarioController extends Controller
             'desc_tp_usuario' => 'required|max:50'
         ]);
 
-        TipoUsuario::where('id_tp_usuario', $id)
-                   ->update(['desc_tp_usuario' => $request->desc_tp_usuario]);
+        $update = TipoUsuario::where('id_tp_usuario', $id)
+                             ->update(['desc_tp_usuario' => $request->desc_tp_usuario]);
 
-        return redirect('/tipos_usuarios')->with('success', 'Tipo de usuário alterado com sucesso');
+        if ($update) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Tipo de usuário alterado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao alterar tipo de usuário.');
+        }
+
+        return redirect('/tipos_usuarios');
     }
 
     /**

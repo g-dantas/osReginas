@@ -43,7 +43,15 @@ class DepartamentoController extends Controller
 
         $departamento = Departamento::create($validateData);
 
-        return redirect('/departamentos')->with('success', 'Departamento cadastrado com sucesso');
+        if ($departamento) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Departamento cadastrado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao cadastrar departamento.');
+        }
+
+        return redirect('/departamentos');
     }
 
     /**
@@ -83,10 +91,18 @@ class DepartamentoController extends Controller
             'desc_depto' => 'required|max:45'
         ]);
 
-        Departamento::where('id_depto', $id)
-                    ->update(['desc_depto' => $request->desc_depto]);
+        $update = Departamento::where('id_depto', $id)
+                              ->update(['desc_depto' => $request->desc_depto]);
 
-        return redirect('/departamentos')->with('success', 'Departamento alterado com sucesso');
+        if ($update) {
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Departamento alterado com sucesso.');
+        } else {
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao alterar departamento.');
+        }
+
+        return redirect('/departamentos');
     }
 
     /**

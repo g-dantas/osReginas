@@ -63,13 +63,22 @@ class OsBodyController extends Controller
                 ->where('id_header_os', $idOs)
                 ->update(['status_header' => $novoStatus]);
         } else {
-            return redirect('/monitoramento')->with('error', 'Erro ao cadastrar um novo atendimento');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao inserir um novo atendimento na OS.');
+
+            return redirect('/monitoramento');
         }
 
         if ($updateStatus) {
-            return redirect('/monitoramento')->with('success', 'Novo atendimento cadastrado com sucesso');
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Novo atendimento cadastrado com sucesso.');
+
+            return redirect('/monitoramento');
         } else {
-            return redirect('/monitoramento')->with('error', 'Erro ao alterar o status da OS');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao lançar um novo atendimento da OS.');
+
+            return redirect('/monitoramento');
         }
     }
 
@@ -140,16 +149,22 @@ class OsBodyController extends Controller
         //
     }
 
-    public function emAtendimento($id)
+    public function emAtendimento($id, Request $request)
     {
         $update = DB::table('os_header')
                     ->where('id_header_os', $id)
                     ->update(['status_header' => 2]);
 
         if ($update) {
-            return redirect('/monitoramento')->with('success', 'Status da OS alterado para Em Andamento');
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Status da OS alterado para Em Andamento.');
+
+            return redirect('/monitoramento');
         } else {
-            return redirect('/monitoramento')->with('error', 'Erro ao alterar o status da OS');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao alterar o status da OS.');
+
+            return redirect('/monitoramento');
         }
     }
 
@@ -172,16 +187,22 @@ class OsBodyController extends Controller
         return view('create_body_os', compact('status', 'idStatusAtual', 'descStatusAtual', 'numOs'));
     }
 
-    public function confirmaFinalizacao($id)
+    public function confirmaFinalizacao($id, Request $request)
     {
         $updateFinaliza = DB::table('os_header')
                             ->where('id_header_os', $id)
                             ->update(['status_header' => 5, 'id_usuario_header' => Auth::user()->id]);
 
         if ($updateFinaliza) {
-            return redirect('/os_header')->with('success', 'OS finalizada com sucesso');
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'OS finalizada com sucesso.');
+
+            return redirect('/os_header');
         } else {
-            return redirect('/os_header')->with('error', 'Erro ao finalizar a OS');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao finalizar a OS.');
+
+            return redirect('/os_header');
         }
     }
 }

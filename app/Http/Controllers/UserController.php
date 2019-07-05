@@ -17,17 +17,21 @@ class UserController extends Controller
         return view('index_user', compact('usuarios'));
     }
 
-    public function desativa($id)
+    public function desativa($id, Request $request)
     {
         $desativa = DB::table('users')
                       ->where('id', $id)
                       ->update(['usuario_ativo' => 'N']);
 
         if ($desativa) {
-            return redirect('/user/index')->with('success', 'Usuário desativado com sucesso');
+            $request->session()->flash('status', 'success');
+            $request->session()->flash('msg', 'Usuário desativado com sucesso.');
         } else {
-            return redirect('/user/index')->with('error', 'Erro ao desativar o usuário');
+            $request->session()->flash('status', 'error');
+            $request->session()->flash('msg', 'Erro ao desativar usuário.');
         }
+
+        return redirect('/user/index');
     }
 
     public function logout()

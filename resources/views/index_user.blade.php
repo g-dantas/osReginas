@@ -12,6 +12,23 @@
         </div>
         <!-- /.col-lg-12 -->
         <div class="row">
+        <div class="col-lg-12">
+            @if(session('status') != null)
+                <div class="panel-body">
+                    @if (session('status') == 'success')
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{session('msg')}}.
+                        </div>
+                    @else
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{session('msg')}}.
+                        </div>
+                    @endif
+                </div>
+            @endif
+        </div>
             <div class="col-lg-12">
                 <div class="panel-body">
                     <div class="table-responsive">
