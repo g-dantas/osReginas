@@ -16,6 +16,7 @@ class TipoDefeitoController extends Controller
         $tiposDefeito = TipoDefeito::all();
 
         return view('index_tipo_defeito', compact('tiposDefeito'));
+        //comentário hotfix
     }
 
     /**
