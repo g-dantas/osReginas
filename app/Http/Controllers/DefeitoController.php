@@ -13,12 +13,12 @@ class DefeitoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*public function index()
     {
         $defeitos = Defeito::all();
 
         return view('index_defeito', compact('defeitos'));
-    }
+    }*/
 
     /**
      * Show the form for creating a new resource.
