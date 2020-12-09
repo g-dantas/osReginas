@@ -13,7 +13,9 @@ class TipoDefeitoController extends Controller
      */
     public function index()
     {
-        //
+        $tiposDefeito = TipoDefeito::all();
+
+        return view('index_tipo_defeito', compact('tiposDefeito'));
     }
 
     /**
